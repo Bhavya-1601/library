@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f4f7fb;
+    color: #1e293b;
+}
+
+/* ================= NAVBAR ================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2b7cff;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: 0.3s ease;
+}
+
+.nav-links li a:hover {
+    background: #2b7cff;
+    color: white;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    height: 100vh;
+    background:
+        linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
+        url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d')
+        no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-content span {
+    color: #38bdf8;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 35px;
+    opacity: 0.9;
+}
+
+/* ================= BUTTONS ================= */
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.student-btn,
+.employee-btn {
+    padding: 14px 32px;
+    border-radius: 30px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.student-btn {
+    background: linear-gradient(45deg, #2b7cff, #00c6ff);
+    color: white;
+}
+
+.employee-btn {
+    background: white;
+    color: #2b7cff;
+}
+
+.student-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(43,124,255,0.4);
+}
+
+.employee-btn:hover {
+    background: #e0f2ff;
+    transform: translateY(-3px);
+}
+
+/* ================= FEATURES ================= */
+
+.features {
+    padding: 100px 80px;
+    text-align: center;
+    background: #f8fafc;
+}
+
+.features h2 {
+    font-size: 34px;
+    margin-bottom: 60px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 320px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    transition: 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin: 20px 0 10px;
+    color: #2b7cff;
+}
+
+.card p {
+    padding: 0 20px 25px;
+    font-size: 14px;
+    color: #475569;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #1e293b;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    nav {
+        padding: 20px 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .features {
+        padding: 80px 20px;
+    }
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+.container{
+display:flex;
+}
+
+/* Sidebar */
+.sidebar{
+width:250px;
+height:100vh;
+background:#1e293b;
+color:white;
+padding:30px 20px;
+position:fixed;
+}
+
+.sidebar h2{
+margin-bottom:40px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar ul li{
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sidebar ul li:hover,
+.sidebar ul .active{
+background:#2b7cff;
+}
+
+/* Main Content */
+.main-content{
+margin-left:250px;
+padding:40px;
+width:100%;
+}
+
+.main-content h1{
+margin-bottom:30px;
+color:#1e293b;
+}

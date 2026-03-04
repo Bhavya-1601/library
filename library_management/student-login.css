@@ -1,0 +1,90 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* ===== Background with Image + Overlay ===== */
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)),
+url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da')
+no-repeat center center/cover;
+}
+
+/* ===== Login Card ===== */
+
+.login-card{
+width:380px;
+padding:45px 35px;
+border-radius:20px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(20px);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+text-align:center;
+color:white;
+}
+
+/* ===== Heading ===== */
+
+.login-card h2{
+margin-bottom:25px;
+font-weight:600;
+letter-spacing:1px;
+}
+
+/* ===== Inputs ===== */
+
+.login-card input{
+width:100%;
+padding:14px;
+margin-bottom:18px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.25);
+background:rgba(255,255,255,0.08);
+color:white;
+outline:none;
+transition:0.3s ease;
+}
+
+.login-card input::placeholder{
+color:#e2e8f0;
+}
+
+.login-card input:focus{
+border:1px solid #38bdf8;
+box-shadow:0 0 12px rgba(56,189,248,0.6);
+}
+
+/* ===== Button ===== */
+
+.login-card button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#2b7cff,#00c6ff);
+color:white;
+font-weight:600;
+cursor:pointer;
+transition:0.3s ease;
+}
+
+.login-card button:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(43,124,255,0.4);
+}
+
+/* ===== Error ===== */
+
+#errorMsg{
+margin-top:12px;
+color:#ff6b6b;
+font-size:14px;
+}

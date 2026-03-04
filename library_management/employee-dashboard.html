@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SmartLibrary Admin</title>
+<link rel="stylesheet" href="employee-dashboard.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+<h2>📚 SmartLibrary</h2>
+<ul>
+<li onclick="showSection(event,'dashboard')" class="active">Dashboard</li>
+<li onclick="showSection(event,'books')">Manage Books</li>
+<li onclick="showSection(event,'requests')">Issue Requests</li>
+<li onclick="showSection(event,'students')">Student Records</li>
+<li onclick="showSection(event,'reports')">Reports</li>
+<li onclick="logout()">Logout</li>
+</ul>
+</div>
+
+<div class="main-content">
+
+<h1>Welcome, Admin 👋</h1>
+
+<!-- DASHBOARD -->
+<div id="dashboardSection" class="section">
+<div class="cards">
+<div class="stat-card blue">
+<h3>Total Books</h3>
+<p id="totalBooks"></p>
+</div>
+
+<div class="stat-card green">
+<h3>Total Stock</h3>
+<p id="totalStock"></p>
+</div>
+
+<div class="stat-card orange">
+<h3>Issued Books</h3>
+<p id="issuedCount"></p>
+</div>
+
+<div class="stat-card red">
+<h3>Overdue</h3>
+<p id="overdueCount"></p>
+</div>
+
+<div class="stat-card teal">
+<h3>Total Fine</h3>
+<p>₹<span id="totalFine"></span></p>
+</div>
+</div>
+</div>
+
+<!-- MANAGE BOOKS -->
+<div id="booksSection" class="section" style="display:none;">
+<h2>Manage Books</h2>
+
+<input id="titleInput" placeholder="Title">
+<input id="authorInput" placeholder="Author">
+<input id="stockInput" type="number" placeholder="Stock">
+<button class="btn primary" onclick="addBook()">Add Book</button>
+
+<div id="bookList"></div>
+</div>
+
+<!-- REQUESTS -->
+<div id="requestsSection" class="section" style="display:none;">
+<h2>Issue Requests</h2>
+<div id="requestList"></div>
+</div>
+
+<!-- STUDENTS -->
+<div id="studentsSection" class="section" style="display:none;">
+<h2>Student Records</h2>
+<div id="studentList"></div>
+</div>
+
+<!-- REPORTS -->
+<div id="reportsSection" class="section" style="display:none;">
+<h2>Reports</h2>
+<p>Total Fine Collected: ₹<span id="reportFine"></span></p>
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* ================= INITIAL DATA ================= */
+
+if(!localStorage.getItem("books")){
+localStorage.setItem("books",JSON.stringify([
+{id:1,title:"Data Structures",author:"Mark",stock:5},
+{id:2,title:"Operating Systems",author:"Galvin",stock:3},
+{id:3,title:"DBMS",author:"Korth",stock:4}
+]));
+}
+
+if(!localStorage.getItem("students")){
+localStorage.setItem("students",JSON.stringify([
+{id:"y23cd084"},
+{id:"y23cd090"}
+]));
+}
+
+if(!localStorage.getItem("issued")){
+localStorage.setItem("issued",JSON.stringify([]));
+}
+
+if(!localStorage.getItem("requests")){
+localStorage.setItem("requests",JSON.stringify([
+{id:1,student:"y23cd084",bookId:1},
+{id:2,student:"y23cd090",bookId:2}
+]));
+}
+
+/* ================= HELPERS ================= */
+
+function getBooks(){ return JSON.parse(localStorage.getItem("books")); }
+function getStudents(){ return JSON.parse(localStorage.getItem("students")); }
+function getIssued(){ return JSON.parse(localStorage.getItem("issued")); }
+function getRequests(){ return JSON.parse(localStorage.getItem("requests")); }
+
+function saveBooks(data){ localStorage.setItem("books",JSON.stringify(data)); }
+function saveIssued(data){ localStorage.setItem("issued",JSON.stringify(data)); }
+function saveRequests(data){ localStorage.setItem("requests",JSON.stringify(data)); }
+
+/* ================= NAVIGATION ================= */
+
+function showSection(e,section){
+document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+document.getElementById(section+"Section").style.display="block";
+document.querySelectorAll(".sidebar li").forEach(li=>li.classList.remove("active"));
+e.target.classList.add("active");
+loadAll();
+}
+
+/* ================= DASHBOARD ================= */
+
+function updateDashboard(){
+let books=getBooks();
+let issued=getIssued();
+
+document.getElementById("totalBooks").textContent=books.length;
+document.getElementById("totalStock").textContent=
+books.reduce((sum,b)=>sum+b.stock,0);
+document.getElementById("issuedCount").textContent=issued.length;
+
+let overdue=0,fine=0;
+issued.forEach(b=>{
+if(new Date()>new Date(b.dueDate)){ overdue++; fine+=10; }
+});
+document.getElementById("overdueCount").textContent=overdue;
+document.getElementById("totalFine").textContent=fine;
+document.getElementById("reportFine").textContent=fine;
+}
+
+/* ================= BOOKS ================= */
+
+function loadBooks(){
+let books=getBooks();
+let container=document.getElementById("bookList");
+container.innerHTML="";
+books.forEach((b,i)=>{
+container.innerHTML+=`
+<div class="data-card">
+<strong>${b.title}</strong> (${b.author}) - Stock: ${b.stock}
+<button class="btn danger" onclick="deleteBook(${i})">Delete</button>
+</div>`;
+});
+}
+
+function addBook(){
+let books=getBooks();
+let title=document.getElementById("titleInput").value;
+let author=document.getElementById("authorInput").value;
+let stock=parseInt(document.getElementById("stockInput").value);
+
+if(title && author && stock>0){
+books.push({id:Date.now(),title,author,stock});
+saveBooks(books);
+loadAll();
+}
+}
+
+function deleteBook(i){
+let books=getBooks();
+books.splice(i,1);
+saveBooks(books);
+loadAll();
+}
+
+/* ================= REQUESTS ================= */
+
+function loadRequests(){
+let requests=getRequests();
+let books=getBooks();
+let container=document.getElementById("requestList");
+container.innerHTML="";
+
+requests.forEach((r,i)=>{
+let book=books.find(b=>b.id===r.bookId);
+container.innerHTML+=`
+<div class="data-card">
+${r.student} requested ${book.title}
+<button class="btn success" onclick="approve(${i})">Approve</button>
+<button class="btn danger" onclick="reject(${i})">Reject</button>
+</div>`;
+});
+}
+
+function approve(i){
+let requests=getRequests();
+let issued=getIssued();
+let books=getBooks();
+
+let req=requests[i];
+let book=books.find(b=>b.id===req.bookId);
+
+if(book.stock>0){
+book.stock--;
+issued.push({
+student:req.student,
+title:book.title,
+dueDate:new Date(Date.now()+5*24*60*60*1000)
+});
+requests.splice(i,1);
+
+saveBooks(books);
+saveIssued(issued);
+saveRequests(requests);
+}
+
+loadAll();
+}
+
+function reject(i){
+let requests=getRequests();
+requests.splice(i,1);
+saveRequests(requests);
+loadAll();
+}
+
+/* ================= STUDENTS ================= */
+
+function loadStudents(){
+let students=getStudents();
+let issued=getIssued();
+let container=document.getElementById("studentList");
+container.innerHTML="";
+students.forEach(s=>{
+let count=issued.filter(i=>i.student===s.id).length;
+container.innerHTML+=`
+<div class="data-card">
+${s.id} - Issued: ${count}
+</div>`;
+});
+}
+
+/* ================= LOAD ALL ================= */
+
+function loadAll(){
+updateDashboard();
+loadBooks();
+loadRequests();
+loadStudents();
+}
+
+loadAll();
+
+function logout(){
+localStorage.removeItem("employeeId");
+window.location.href="index.html";
+}
+
+</script>
+
+</body>
+</html>

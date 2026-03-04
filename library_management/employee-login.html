@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Login - SmartLibrary</title>
+<link rel="stylesheet" href="employee-login.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="login-card">
+<h2>📚 Employee Portal</h2>
+<p>Librarian Access</p>
+
+<form id="employeeLoginForm">
+<input type="text" id="empId" placeholder="Enter Employee ID (EMP001)" required>
+<input type="password" id="empPass" placeholder="Enter Password" required>
+<button type="submit">Login</button>
+<p id="errorMsg"></p>
+</form>
+</div>
+
+<script>
+document.getElementById("employeeLoginForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+const id=document.getElementById("empId").value.trim();
+const pass=document.getElementById("empPass").value.trim();
+
+const validEmployees=["EMP001","EMP002","EMP003"];
+const validPassword="1234";
+
+if(validEmployees.includes(id) && pass===validPassword){
+localStorage.setItem("employeeId",id);
+window.location.href="employee-dashboard.html";
+}else{
+document.getElementById("errorMsg").textContent="Invalid Employee ID or Password";
+}
+});
+</script>
+
+</body>
+</html>
