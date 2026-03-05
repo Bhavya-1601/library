@@ -66,3 +66,76 @@ box-shadow:0 10px 20px rgba(43,124,255,0.4);
 margin-top:10px;
 color:#ff6b6b;
 }
+/* LOGIN ICON */
+
+.login-icon{
+font-size:40px;
+margin-bottom:10px;
+color:#38bdf8;
+}
+
+/* INPUT ICON STYLE */
+
+.input-box{
+position:relative;
+margin-bottom:15px;
+}
+
+.input-box input{
+width:100%;
+padding:12px 12px 12px 40px;
+border-radius:10px;
+border:none;
+outline:none;
+}
+
+.input-box i{
+position:absolute;
+left:12px;
+top:12px;
+color:#334155;
+}
+
+/* LOGIN TITLE STYLE */
+
+.login-card h2{
+font-size:26px;
+font-weight:600;
+}
+
+/* SMALL ANIMATION */
+
+.login-card{
+animation:fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+.login-icon{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.input-box{
+position:relative;
+margin-bottom:15px;
+}
+
+.input-box i{
+position:absolute;
+left:12px;
+top:12px;
+color:#555;
+}
+
+.input-box input{
+padding-left:35px;
+}
