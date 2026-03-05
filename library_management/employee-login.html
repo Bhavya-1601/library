@@ -1,27 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<title>Employee Login - SmartLibrary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Employee Login | BookSphere</title>
+
 <link rel="stylesheet" href="employee-login.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
+
 <body>
 
-<div class="login-card">
-<h2>📚 Employee Portal</h2>
-<p>Librarian Access</p>
+<div class="employee-wrapper">
+
+<div class="employee-card">
+
+<h1 class="logo">📚 BookSphere</h1>
+
+<h2>Librarian Portal</h2>
+
+<p class="subtitle">Authorized library staff access</p>
 
 <form id="employeeLoginForm">
-<input type="text" id="empId" placeholder="Enter Employee ID (EMP001)" required>
-<input type="password" id="empPass" placeholder="Enter Password" required>
-<button type="submit">Login</button>
-<p id="errorMsg"></p>
+
+<div class="input-group">
+<i class="fa fa-user"></i>
+<input type="text" id="empId" placeholder="Employee ID (EMP001)" required>
+</div>
+
+<div class="input-group">
+<i class="fa fa-lock"></i>
+<input type="password" id="empPass" placeholder="Password" required>
+</div>
+
+<button type="submit" class="login-btn">
+<i class="fa fa-right-to-bracket"></i> Login
+</button>
+
+<p id="errorMsg" class="error"></p>
+
 </form>
+
+<a href="index.html" class="back-home">
+<i class="fa fa-arrow-left"></i> Back to Home
+</a>
+
+</div>
+
 </div>
 
 <script>
+
 document.getElementById("employeeLoginForm").addEventListener("submit",function(e){
+
 e.preventDefault();
 
 const id=document.getElementById("empId").value.trim();
@@ -31,12 +68,18 @@ const validEmployees=["EMP001","EMP002","EMP003"];
 const validPassword="1234";
 
 if(validEmployees.includes(id) && pass===validPassword){
+
 localStorage.setItem("employeeId",id);
 window.location.href="employee-dashboard.html";
+
 }else{
+
 document.getElementById("errorMsg").textContent="Invalid Employee ID or Password";
+
 }
+
 });
+
 </script>
 
 </body>

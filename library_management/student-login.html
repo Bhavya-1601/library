@@ -1,43 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<title>Student Login - SmartLibrary</title>
+<title>Student Login - LibNova</title>
+
 <link rel="stylesheet" href="student-login.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
+
 <body>
 
 <div class="login-container">
-    <div class="login-card">
-        <h2>🎓 Student Login</h2>
 
-        <form id="loginForm">
-            <input type="text" id="studentId" placeholder="Enter Student ID (y23cd084)" required>
-            <input type="password" id="password" placeholder="Enter Password" required>
-            <button type="submit">Login</button>
-            <p id="errorMsg"></p>
-        </form>
-    </div>
+<div class="login-card">
+
+<div class="login-icon">
+<i class="fa fa-graduation-cap"></i>
+</div>
+
+<h2>Student Portal</h2>
+
+<form id="loginForm">
+
+<div class="input-box">
+<i class="fa fa-id-card"></i>
+<input type="text" id="studentId" placeholder="Student ID (y23cd090)" required>
+</div>
+
+<div class="input-box">
+<i class="fa fa-lock"></i>
+<input type="password" id="password" placeholder="Password" required>
+</div>
+
+<button type="submit">
+<i class="fa fa-right-to-bracket"></i> Login
+</button>
+
+<p id="errorMsg"></p>
+
+</form>
+
+<p class="login-footer">Library Management System</p>
+
+</div>
+
 </div>
 
 <script>
+
 document.getElementById("loginForm").addEventListener("submit", function(e){
-    e.preventDefault();
 
-    const id = document.getElementById("studentId").value.trim();
-    const pass = document.getElementById("password").value.trim();
+e.preventDefault();
 
-    const validStudents = ["y23cd084", "y23cd090"];
-    const validPassword = "1234";
+const id = document.getElementById("studentId").value.trim();
+const pass = document.getElementById("password").value.trim();
 
-    if(validStudents.includes(id) && pass === validPassword){
-        localStorage.setItem("studentId", id);
-        window.location.href = "student.html";
-    } else {
-        document.getElementById("errorMsg").textContent = "Invalid ID or Password";
-    }
+const validStudents = ["y23cd084", "y23cd090"];
+const validPassword = "1234";
+
+if(validStudents.includes(id) && pass === validPassword){
+
+localStorage.setItem("studentId", id);
+
+window.location.href = "student.html";
+
+}else{
+
+document.getElementById("errorMsg").textContent = "Invalid ID or Password";
+
+}
+
 });
+
 </script>
 
 </body>

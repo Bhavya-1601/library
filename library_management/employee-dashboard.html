@@ -2,33 +2,69 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SmartLibrary Admin</title>
+<title>LibNova Admin Dashboard</title>
+
 <link rel="stylesheet" href="employee-dashboard.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
+
 <body>
 
 <div class="container">
 
+<!-- Sidebar -->
+
 <div class="sidebar">
-<h2>📚 SmartLibrary</h2>
+
+<h2>📚 LibNova</h2>
+
 <ul>
-<li onclick="showSection(event,'dashboard')" class="active">Dashboard</li>
-<li onclick="showSection(event,'books')">Manage Books</li>
-<li onclick="showSection(event,'requests')">Issue Requests</li>
-<li onclick="showSection(event,'students')">Student Records</li>
-<li onclick="showSection(event,'reports')">Reports</li>
-<li onclick="logout()">Logout</li>
+
+<li onclick="showSection(event,'dashboard')" class="active">
+<i class="fa fa-chart-line"></i> Dashboard
+</li>
+
+<li onclick="showSection(event,'books')">
+<i class="fa fa-book"></i> Manage Books
+</li>
+
+<li onclick="showSection(event,'requests')">
+<i class="fa fa-envelope"></i> Issue Requests
+</li>
+
+<li onclick="showSection(event,'students')">
+<i class="fa fa-users"></i> Students
+</li>
+
+<li onclick="showSection(event,'reports')">
+<i class="fa fa-chart-pie"></i> Reports
+</li>
+
+<li onclick="logout()">
+<i class="fa fa-sign-out-alt"></i> Logout
+</li>
+
 </ul>
+
 </div>
+
+
+<!-- Main Content -->
 
 <div class="main-content">
 
-<h1>Welcome, Admin 👋</h1>
+<h1>Library Admin Panel</h1>
 
-<!-- DASHBOARD -->
+<!-- Dashboard -->
+
 <div id="dashboardSection" class="section">
+
 <div class="cards">
+
 <div class="stat-card blue">
 <h3>Total Books</h3>
 <p id="totalBooks"></p>
@@ -53,45 +89,71 @@
 <h3>Total Fine</h3>
 <p>₹<span id="totalFine"></span></p>
 </div>
-</div>
+
 </div>
 
-<!-- MANAGE BOOKS -->
+</div>
+
+
+<!-- Manage Books -->
+
 <div id="booksSection" class="section" style="display:none;">
+
 <h2>Manage Books</h2>
 
-<input id="titleInput" placeholder="Title">
+<input id="titleInput" placeholder="Book Title">
 <input id="authorInput" placeholder="Author">
 <input id="stockInput" type="number" placeholder="Stock">
-<button class="btn primary" onclick="addBook()">Add Book</button>
+
+<button class="btn primary" onclick="addBook()">
+<i class="fa fa-plus"></i> Add Book
+</button>
 
 <div id="bookList"></div>
+
 </div>
 
-<!-- REQUESTS -->
+
+<!-- Requests -->
+
 <div id="requestsSection" class="section" style="display:none;">
+
 <h2>Issue Requests</h2>
+
 <div id="requestList"></div>
+
 </div>
 
-<!-- STUDENTS -->
+
+<!-- Students -->
+
 <div id="studentsSection" class="section" style="display:none;">
+
 <h2>Student Records</h2>
+
 <div id="studentList"></div>
+
 </div>
 
-<!-- REPORTS -->
+
+<!-- Reports -->
+
 <div id="reportsSection" class="section" style="display:none;">
+
 <h2>Reports</h2>
+
 <p>Total Fine Collected: ₹<span id="reportFine"></span></p>
+
 </div>
 
 </div>
+
 </div>
+
 
 <script>
 
-/* ================= INITIAL DATA ================= */
+/* Initial Data */
 
 if(!localStorage.getItem("books")){
 localStorage.setItem("books",JSON.stringify([
@@ -119,7 +181,7 @@ localStorage.setItem("requests",JSON.stringify([
 ]));
 }
 
-/* ================= HELPERS ================= */
+/* Helpers */
 
 function getBooks(){ return JSON.parse(localStorage.getItem("books")); }
 function getStudents(){ return JSON.parse(localStorage.getItem("students")); }
@@ -130,91 +192,147 @@ function saveBooks(data){ localStorage.setItem("books",JSON.stringify(data)); }
 function saveIssued(data){ localStorage.setItem("issued",JSON.stringify(data)); }
 function saveRequests(data){ localStorage.setItem("requests",JSON.stringify(data)); }
 
-/* ================= NAVIGATION ================= */
+/* Navigation */
 
 function showSection(e,section){
+
 document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+
 document.getElementById(section+"Section").style.display="block";
+
 document.querySelectorAll(".sidebar li").forEach(li=>li.classList.remove("active"));
+
 e.target.classList.add("active");
+
 loadAll();
+
 }
 
-/* ================= DASHBOARD ================= */
+/* Dashboard */
 
 function updateDashboard(){
+
 let books=getBooks();
 let issued=getIssued();
 
 document.getElementById("totalBooks").textContent=books.length;
+
 document.getElementById("totalStock").textContent=
 books.reduce((sum,b)=>sum+b.stock,0);
+
 document.getElementById("issuedCount").textContent=issued.length;
 
 let overdue=0,fine=0;
+
 issued.forEach(b=>{
-if(new Date()>new Date(b.dueDate)){ overdue++; fine+=10; }
+if(new Date()>new Date(b.dueDate)){
+overdue++;
+fine+=10;
+}
 });
+
 document.getElementById("overdueCount").textContent=overdue;
 document.getElementById("totalFine").textContent=fine;
 document.getElementById("reportFine").textContent=fine;
+
 }
 
-/* ================= BOOKS ================= */
+/* Books */
 
 function loadBooks(){
+
 let books=getBooks();
 let container=document.getElementById("bookList");
+
 container.innerHTML="";
+
 books.forEach((b,i)=>{
+
 container.innerHTML+=`
+
 <div class="data-card">
+
 <strong>${b.title}</strong> (${b.author}) - Stock: ${b.stock}
-<button class="btn danger" onclick="deleteBook(${i})">Delete</button>
-</div>`;
+
+<button class="btn danger" onclick="deleteBook(${i})">
+<i class="fa fa-trash"></i> Delete
+</button>
+
+</div>
+
+`;
+
 });
+
 }
 
 function addBook(){
+
 let books=getBooks();
+
 let title=document.getElementById("titleInput").value;
 let author=document.getElementById("authorInput").value;
 let stock=parseInt(document.getElementById("stockInput").value);
 
 if(title && author && stock>0){
+
 books.push({id:Date.now(),title,author,stock});
+
 saveBooks(books);
+
 loadAll();
+
 }
+
 }
 
 function deleteBook(i){
+
 let books=getBooks();
+
 books.splice(i,1);
+
 saveBooks(books);
+
 loadAll();
+
 }
 
-/* ================= REQUESTS ================= */
+/* Requests */
 
 function loadRequests(){
+
 let requests=getRequests();
 let books=getBooks();
+
 let container=document.getElementById("requestList");
+
 container.innerHTML="";
 
 requests.forEach((r,i)=>{
+
 let book=books.find(b=>b.id===r.bookId);
+
 container.innerHTML+=`
+
 <div class="data-card">
+
 ${r.student} requested ${book.title}
+
 <button class="btn success" onclick="approve(${i})">Approve</button>
+
 <button class="btn danger" onclick="reject(${i})">Reject</button>
-</div>`;
+
+</div>
+
+`;
+
 });
+
 }
 
 function approve(i){
+
 let requests=getRequests();
 let issued=getIssued();
 let books=getBooks();
@@ -223,59 +341,87 @@ let req=requests[i];
 let book=books.find(b=>b.id===req.bookId);
 
 if(book.stock>0){
+
 book.stock--;
+
 issued.push({
 student:req.student,
 title:book.title,
 dueDate:new Date(Date.now()+5*24*60*60*1000)
 });
+
 requests.splice(i,1);
 
 saveBooks(books);
 saveIssued(issued);
 saveRequests(requests);
+
 }
 
 loadAll();
+
 }
 
 function reject(i){
+
 let requests=getRequests();
+
 requests.splice(i,1);
+
 saveRequests(requests);
+
 loadAll();
+
 }
 
-/* ================= STUDENTS ================= */
+/* Students */
 
 function loadStudents(){
+
 let students=getStudents();
 let issued=getIssued();
+
 let container=document.getElementById("studentList");
+
 container.innerHTML="";
+
 students.forEach(s=>{
+
 let count=issued.filter(i=>i.student===s.id).length;
+
 container.innerHTML+=`
+
 <div class="data-card">
-${s.id} - Issued: ${count}
-</div>`;
+
+${s.id} - Issued Books: ${count}
+
+</div>
+
+`;
+
 });
+
 }
 
-/* ================= LOAD ALL ================= */
+/* Load All */
 
 function loadAll(){
+
 updateDashboard();
 loadBooks();
 loadRequests();
 loadStudents();
+
 }
 
 loadAll();
 
 function logout(){
+
 localStorage.removeItem("employeeId");
+
 window.location.href="index.html";
+
 }
 
 </script>

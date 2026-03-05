@@ -1,3 +1,5 @@
+/* ===== GLOBAL ===== */
+
 *{
 margin:0;
 padding:0;
@@ -5,7 +7,7 @@ box-sizing:border-box;
 font-family:'Poppins',sans-serif;
 }
 
-/* ===== Background with Image + Overlay ===== */
+/* ===== BACKGROUND ===== */
 
 body{
 height:100vh;
@@ -13,78 +15,135 @@ display:flex;
 justify-content:center;
 align-items:center;
 background:
-linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)),
-url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da')
+linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.9)),
+url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da")
 no-repeat center center/cover;
 }
 
-/* ===== Login Card ===== */
+/* ===== LOGIN WRAPPER ===== */
+
+.login-wrapper{
+display:flex;
+justify-content:center;
+align-items:center;
+width:100%;
+}
+
+/* ===== LOGIN CARD ===== */
 
 .login-card{
 width:380px;
-padding:45px 35px;
+padding:40px 35px;
 border-radius:20px;
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(20px);
-box-shadow:0 20px 40px rgba(0,0,0,0.5);
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(18px);
+box-shadow:0 25px 50px rgba(0,0,0,0.45);
 text-align:center;
 color:white;
+animation:fadeIn 0.8s ease;
 }
 
-/* ===== Heading ===== */
+/* ===== LOGO ===== */
 
-.login-card h2{
+.logo{
+font-size:24px;
+font-weight:700;
+margin-bottom:5px;
+}
+
+/* ===== SUBTITLE ===== */
+
+.subtitle{
+font-size:13px;
+opacity:0.8;
 margin-bottom:25px;
-font-weight:600;
-letter-spacing:1px;
 }
 
-/* ===== Inputs ===== */
+/* ===== INPUT GROUP ===== */
 
-.login-card input{
-width:100%;
-padding:14px;
+.input-group{
+position:relative;
 margin-bottom:18px;
+}
+
+.input-group i{
+position:absolute;
+left:14px;
+top:15px;
+color:#e2e8f0;
+}
+
+.input-group input{
+width:100%;
+padding:14px 14px 14px 42px;
 border-radius:12px;
 border:1px solid rgba(255,255,255,0.25);
 background:rgba(255,255,255,0.08);
 color:white;
 outline:none;
-transition:0.3s ease;
+transition:0.3s;
 }
 
-.login-card input::placeholder{
-color:#e2e8f0;
+.input-group input::placeholder{
+color:#cbd5f5;
 }
 
-.login-card input:focus{
+.input-group input:focus{
 border:1px solid #38bdf8;
 box-shadow:0 0 12px rgba(56,189,248,0.6);
 }
 
-/* ===== Button ===== */
+/* ===== LOGIN BUTTON ===== */
 
-.login-card button{
+.login-btn{
 width:100%;
 padding:14px;
 border:none;
 border-radius:30px;
-background:linear-gradient(45deg,#2b7cff,#00c6ff);
+background:linear-gradient(45deg,#2563eb,#38bdf8);
 color:white;
 font-weight:600;
 cursor:pointer;
-transition:0.3s ease;
+transition:0.3s;
 }
 
-.login-card button:hover{
+.login-btn:hover{
 transform:translateY(-3px);
-box-shadow:0 10px 20px rgba(43,124,255,0.4);
+box-shadow:0 10px 20px rgba(37,99,235,0.4);
 }
 
-/* ===== Error ===== */
+/* ===== ERROR MESSAGE ===== */
 
-#errorMsg{
+.error{
 margin-top:12px;
 color:#ff6b6b;
 font-size:14px;
+}
+
+/* ===== BACK HOME LINK ===== */
+
+.back-home{
+display:inline-block;
+margin-top:18px;
+font-size:13px;
+color:#e2e8f0;
+text-decoration:none;
+transition:0.3s;
+}
+
+.back-home:hover{
+color:#38bdf8;
+}
+
+/* ===== ANIMATION ===== */
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(25px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
