@@ -3,7 +3,11 @@
 <head>
 
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Student Dashboard | BookSphere</title>
+=======
+<title>Student Dashboard - LibNova</title>
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 <link rel="stylesheet" href="student-dashboard.css">
 
@@ -22,7 +26,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <div class="sidebar">
 
+<<<<<<< HEAD
 <h2 class="logo">📚 BookSphere</h2>
+=======
+<h2>📚 LibNova</h2>
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 <ul>
 
@@ -31,7 +39,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </li>
 
 <li onclick="showSection(event,'search')">
+<<<<<<< HEAD
 <i class="fa fa-book"></i> Browse Books
+=======
+<i class="fa fa-book"></i> Search Books
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 </li>
 
 <li onclick="showSection(event,'mybooks')">
@@ -43,7 +55,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </li>
 
 <li onclick="logout()">
+<<<<<<< HEAD
 <i class="fa fa-right-from-bracket"></i> Logout
+=======
+<i class="fa fa-sign-out-alt"></i> Logout
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 </li>
 
 </ul>
@@ -55,6 +71,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <div class="main-content">
 
+<<<<<<< HEAD
 <div class="top-header">
 
 <h1 id="welcomeText"></h1>
@@ -62,6 +79,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <div class="user-info">
 <i class="fa fa-user-circle"></i>
 <span id="userId"></span>
+=======
+<h1 id="welcomeText"></h1>
+
+<!-- DASHBOARD -->
+
+<div id="dashboardSection" class="section">
+
+<div class="dashboard-header">
+
+<h2>📊 Library Overview</h2>
+<p>Your activity summary</p>
+
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 </div>
 
 </div>
@@ -76,31 +106,46 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <div class="cards">
 
 <div class="card">
+<<<<<<< HEAD
 <i class="fa fa-book"></i>
+=======
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 <h3>Total Issued</h3>
 <p id="totalIssued">0</p>
 </div>
 
 <div class="card">
+<<<<<<< HEAD
 <i class="fa fa-layer-group"></i>
+=======
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 <h3>Available Stock</h3>
 <p id="availableCount">0</p>
 </div>
 
 <div class="card">
+<<<<<<< HEAD
 <i class="fa fa-money-bill"></i>
+=======
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 <h3>Total Fine</h3>
 <p>₹<span id="totalFine">0</span></p>
 </div>
 
 <div class="card">
+<<<<<<< HEAD
 <i class="fa fa-circle-check"></i>
+=======
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 <h3>Status</h3>
 <p id="accountStatus">Active</p>
 </div>
 
 <div class="card">
+<<<<<<< HEAD
 <i class="fa fa-book-open"></i>
+=======
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 <h3>Limit</h3>
 <p>5 Books</p>
 </div>
@@ -114,12 +159,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <div id="searchSection" class="section" style="display:none;">
 
+<<<<<<< HEAD
 <h2 class="section-title">🔍 Browse Books</h2>
 
 <div class="search-bar">
 
 <input type="text"
 id="searchInput"
+=======
+<h2>🔍 Search Books</h2>
+
+<input type="text" id="searchInput"
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 placeholder="Search by title..."
 onkeyup="filterBooks()">
 
@@ -133,18 +184,29 @@ onkeyup="filterBooks()">
 
 </select>
 
+<<<<<<< HEAD
 </div>
 
 <div id="bookList" class="book-grid"></div>
 
 </div>
 
+=======
+<div id="bookList" class="book-grid"></div>
+
+</div>
+
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 <!-- MY BOOKS -->
 
 <div id="mybooksSection" class="section" style="display:none;">
 
+<<<<<<< HEAD
 <h2 class="section-title">📚 My Issued Books</h2>
+=======
+<h2>📚 My Issued Books</h2>
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 <div id="myBookList" class="book-grid"></div>
 
@@ -155,7 +217,11 @@ onkeyup="filterBooks()">
 
 <div id="profileSection" class="section" style="display:none;">
 
+<<<<<<< HEAD
 <h2 class="section-title">👤 Student Profile</h2>
+=======
+<h2>👤 Student Profile</h2>
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 <div class="profile-card">
 
@@ -178,7 +244,11 @@ onkeyup="filterBooks()">
 
 <script>
 
+<<<<<<< HEAD
 /* AUTH CHECK */
+=======
+/* ===== AUTH CHECK ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 const studentId = localStorage.getItem("studentId");
 
@@ -189,10 +259,15 @@ window.location.href="student-login.html";
 document.getElementById("welcomeText").textContent =
 "Welcome, "+studentId+" 👋";
 
+<<<<<<< HEAD
 document.getElementById("userId").textContent = studentId;
 
 
 /* BOOK DATABASE */
+=======
+
+/* ===== BOOK DATABASE ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 const books=[
 
@@ -201,23 +276,43 @@ const books=[
 {id:3,title:"DBMS",author:"Korth",category:"CSE",stock:6},
 {id:4,title:"Computer Networks",author:"Tanenbaum",category:"CSE",stock:3},
 {id:5,title:"Java Programming",author:"Herbert Schildt",category:"CSE",stock:7},
+<<<<<<< HEAD
 {id:6,title:"Python Basics",author:"Guido",category:"CSE",stock:8},
 {id:7,title:"Digital Electronics",author:"Morris Mano",category:"ECE",stock:5},
 {id:8,title:"Signals & Systems",author:"Oppenheim",category:"ECE",stock:4},
 {id:9,title:"Microprocessors",author:"Gaonkar",category:"ECE",stock:6},
+=======
+
+{id:6,title:"Python Basics",author:"Guido",category:"CSE",stock:8},
+
+{id:7,title:"Digital Electronics",author:"Morris Mano",category:"ECE",stock:5},
+
+{id:8,title:"Signals & Systems",author:"Oppenheim",category:"ECE",stock:4},
+
+{id:9,title:"Microprocessors",author:"Gaonkar",category:"ECE",stock:6},
+
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 {id:10,title:"Control Systems",author:"Nagrath",category:"ECE",stock:5}
 
 ];
 
 
+<<<<<<< HEAD
 /* STORAGE */
+=======
+/* ===== STORAGE ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 if(!localStorage.getItem("issuedBooks")){
 localStorage.setItem("issuedBooks",JSON.stringify([]));
 }
 
 
+<<<<<<< HEAD
 /* NAVIGATION */
+=======
+/* ===== NAVIGATION ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function showSection(e,section){
 
@@ -239,7 +334,11 @@ loadProfile();
 }
 
 
+<<<<<<< HEAD
 /* LOAD BOOKS */
+=======
+/* ===== LOAD BOOKS ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function loadBooks(){
 
@@ -258,8 +357,11 @@ container.innerHTML+=`
 <div class="book-card">
 
 <h3>${book.title}</h3>
+
 <p>${book.author}</p>
+
 <p>Category: ${book.category}</p>
+
 <p>Stock: ${book.stock}</p>
 
 <button ${book.stock<=0?"disabled":""}
@@ -278,7 +380,11 @@ ${book.stock>0?"Issue":"Out of Stock"}
 }
 
 
+<<<<<<< HEAD
 /* SEARCH */
+=======
+/* ===== SEARCH ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function filterBooks(){
 
@@ -300,7 +406,11 @@ title.includes(input)?"block":"none";
 }
 
 
+<<<<<<< HEAD
 /* ISSUE BOOK */
+=======
+/* ===== ISSUE BOOK ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function issueBook(id){
 
@@ -329,7 +439,11 @@ updateDashboard();
 }
 
 
+<<<<<<< HEAD
 /* MY BOOKS */
+=======
+/* ===== MY BOOKS ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function loadMyBooks(){
 
@@ -381,7 +495,11 @@ updateDashboard();
 }
 
 
+<<<<<<< HEAD
 /* DASHBOARD */
+=======
+/* ===== DASHBOARD ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function updateDashboard(){
 
@@ -408,7 +526,11 @@ fine>0?"Fine Pending":"Active";
 }
 
 
+<<<<<<< HEAD
 /* PROFILE */
+=======
+/* ===== PROFILE ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function loadProfile(){
 
@@ -427,11 +549,16 @@ document.getElementById("totalFine").textContent;
 }
 
 
+<<<<<<< HEAD
 /* LOGOUT */
+=======
+/* ===== LOGOUT ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 function logout(){
 
 localStorage.removeItem("studentId");
+
 localStorage.removeItem("issuedBooks");
 
 window.location.href="index.html";
@@ -439,7 +566,11 @@ window.location.href="index.html";
 }
 
 
+<<<<<<< HEAD
 /* INITIAL LOAD */
+=======
+/* ===== INITIAL LOAD ===== */
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 
 updateDashboard();
 loadBooks();

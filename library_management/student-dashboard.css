@@ -22,7 +22,11 @@ min-height:100vh;
 /* ===== SIDEBAR ===== */
 
 .sidebar{
+<<<<<<< HEAD
 width:240px;
+=======
+width:230px;
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 height:100vh;
 background:linear-gradient(180deg,#2563eb,#1e3a8a);
 color:white;
@@ -30,11 +34,20 @@ padding:30px 20px;
 position:fixed;
 left:0;
 top:0;
+<<<<<<< HEAD
 }
 
 .sidebar .logo{
 font-size:22px;
 margin-bottom:35px;
+=======
+box-shadow:4px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar h2{
+margin-bottom:35px;
+font-size:20px;
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 .sidebar ul{
@@ -44,7 +57,11 @@ list-style:none;
 .sidebar ul li{
 padding:14px;
 margin-bottom:8px;
+<<<<<<< HEAD
 border-radius:10px;
+=======
+border-radius:8px;
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 cursor:pointer;
 transition:0.3s;
 display:flex;
@@ -65,9 +82,15 @@ font-weight:600;
 /* ===== MAIN CONTENT ===== */
 
 .main-content{
+<<<<<<< HEAD
 margin-left:240px;
 padding:40px;
 width:calc(100% - 240px);
+=======
+margin-left:230px;
+padding:40px;
+width:calc(100% - 230px);
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 /* ===== TOP HEADER ===== */
@@ -79,6 +102,7 @@ align-items:center;
 margin-bottom:30px;
 }
 
+<<<<<<< HEAD
 .user-info{
 display:flex;
 align-items:center;
@@ -98,22 +122,35 @@ margin-bottom:20px;
 font-size:22px;
 }
 
+=======
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 /* ===== DASHBOARD CARDS ===== */
 
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:25px;
+<<<<<<< HEAD
+=======
+margin-top:20px;
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 .card{
 background:white;
 padding:28px;
+<<<<<<< HEAD
 border-radius:18px;
 box-shadow:0 10px 25px rgba(0,0,0,0.05);
 text-align:center;
 transition:0.3s;
 border-top:4px solid #2563eb;
+=======
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+text-align:center;
+transition:0.3s;
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 .card:hover{
@@ -137,6 +174,7 @@ font-size:22px;
 font-weight:600;
 }
 
+<<<<<<< HEAD
 /* ===== SEARCH BAR ===== */
 
 .search-bar{
@@ -144,6 +182,18 @@ display:flex;
 gap:10px;
 margin-bottom:20px;
 flex-wrap:wrap;
+=======
+/* ===== SEARCH + FILTER ===== */
+
+#searchInput{
+margin-top:20px;
+padding:10px;
+width:250px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-right:10px;
+outline:none;
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 #searchInput{
@@ -174,15 +224,26 @@ padding:20px;
 border-radius:15px;
 box-shadow:0 10px 25px rgba(0,0,0,0.05);
 transition:0.3s;
+<<<<<<< HEAD
 border-left:4px solid #2563eb;
+=======
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 .book-card:hover{
 transform:translateY(-6px);
+<<<<<<< HEAD
+=======
+box-shadow:0 15px 30px rgba(0,0,0,0.08);
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 .book-card h3{
 margin-bottom:6px;
+<<<<<<< HEAD
+=======
+font-size:16px;
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 }
 
 .book-card p{
@@ -223,6 +284,14 @@ box-shadow:0 10px 25px rgba(0,0,0,0.05);
 width:350px;
 }
 
+<<<<<<< HEAD
+=======
+.profile-card p{
+margin-bottom:12px;
+font-size:15px;
+}
+
+>>>>>>> e76602de1dab587667e956594729150899e5bfe1
 /* ===== RESPONSIVE ===== */
 
 @media(max-width:768px){
