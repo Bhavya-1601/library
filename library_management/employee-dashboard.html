@@ -1,14 +1,19 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>LibNova Admin Dashboard</title>
 
 <link rel="stylesheet" href="employee-dashboard.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
@@ -16,32 +21,32 @@
 
 <div class="container">
 
-<!-- Sidebar -->
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
-<h2>📚 LibNova</h2>
+<h2 class="logo">📚 LibNova</h2>
 
 <ul>
 
-<li onclick="showSection(event,'dashboard')" class="active">
+<li onclick="showSection('dashboard')" class="active">
 <i class="fa fa-chart-line"></i> Dashboard
 </li>
 
-<li onclick="showSection(event,'books')">
+<li onclick="showSection('books')">
 <i class="fa fa-book"></i> Manage Books
 </li>
 
-<li onclick="showSection(event,'requests')">
-<i class="fa fa-envelope"></i> Issue Requests
+<li onclick="showSection('requests')">
+<i class="fa fa-envelope"></i> Book Requests
 </li>
 
-<li onclick="showSection(event,'students')">
+<li onclick="showSection('students')">
 <i class="fa fa-users"></i> Students
 </li>
 
-<li onclick="showSection(event,'reports')">
-<i class="fa fa-chart-pie"></i> Reports
+<li onclick="showSection('branches')">
+<i class="fa fa-building"></i> Branch Libraries
 </li>
 
 <li onclick="logout()">
@@ -53,41 +58,37 @@
 </div>
 
 
-<!-- Main Content -->
+<!-- MAIN CONTENT -->
 
 <div class="main-content">
 
-<h1>Library Admin Panel</h1>
+<h1 id="welcomeText"></h1>
 
-<!-- Dashboard -->
+
+<!-- DASHBOARD -->
 
 <div id="dashboardSection" class="section">
 
 <div class="cards">
 
-<div class="stat-card blue">
+<div class="card">
 <h3>Total Books</h3>
 <p id="totalBooks"></p>
 </div>
 
-<div class="stat-card green">
+<div class="card">
 <h3>Total Stock</h3>
 <p id="totalStock"></p>
 </div>
 
-<div class="stat-card orange">
+<div class="card">
 <h3>Issued Books</h3>
 <p id="issuedCount"></p>
 </div>
 
-<div class="stat-card red">
-<h3>Overdue</h3>
-<p id="overdueCount"></p>
-</div>
-
-<div class="stat-card teal">
-<h3>Total Fine</h3>
-<p>₹<span id="totalFine"></span></p>
+<div class="card">
+<h3>Requests</h3>
+<p id="requestCount"></p>
 </div>
 
 </div>
@@ -95,39 +96,49 @@
 </div>
 
 
-<!-- Manage Books -->
+<!-- MANAGE BOOKS -->
 
-<div id="booksSection" class="section" style="display:none;">
+<div id="booksSection" class="section" style="display:none">
 
 <h2>Manage Books</h2>
 
+<div class="form-row">
+
 <input id="titleInput" placeholder="Book Title">
 <input id="authorInput" placeholder="Author">
+
+<select id="branchInput">
+<option value="Central">Central</option>
+<option value="CSE">CSE</option>
+<option value="ECE">ECE</option>
+<option value="MECH">Mechanical</option>
+</select>
+
 <input id="stockInput" type="number" placeholder="Stock">
 
-<button class="btn primary" onclick="addBook()">
-<i class="fa fa-plus"></i> Add Book
-</button>
+<button onclick="addBook()">Add Book</button>
+
+</div>
 
 <div id="bookList"></div>
 
 </div>
 
 
-<!-- Requests -->
+<!-- REQUESTS -->
 
-<div id="requestsSection" class="section" style="display:none;">
+<div id="requestsSection" class="section" style="display:none">
 
-<h2>Issue Requests</h2>
+<h2>Student Book Requests</h2>
 
 <div id="requestList"></div>
 
 </div>
 
 
-<!-- Students -->
+<!-- STUDENTS -->
 
-<div id="studentsSection" class="section" style="display:none;">
+<div id="studentsSection" class="section" style="display:none">
 
 <h2>Student Records</h2>
 
@@ -136,13 +147,20 @@
 </div>
 
 
-<!-- Reports -->
+<!-- BRANCHES -->
 
-<div id="reportsSection" class="section" style="display:none;">
+<div id="branchesSection" class="section" style="display:none">
 
-<h2>Reports</h2>
+<h2>Branch Libraries</h2>
 
-<p>Total Fine Collected: ₹<span id="reportFine"></span></p>
+<button onclick="showBranch('Central')">Central</button>
+<button onclick="showBranch('CSE')">CSE</button>
+<button onclick="showBranch('ECE')">ECE</button>
+<button onclick="showBranch('MECH')">Mechanical</button>
+
+<h3 id="branchTitle"></h3>
+
+<div id="branchBooks"></div>
 
 </div>
 
@@ -153,67 +171,74 @@
 
 <script>
 
-/* Initial Data */
+const employeeId = localStorage.getItem("employeeId") || "EMP001";
+
+document.getElementById("welcomeText").textContent =
+"Welcome Admin " + employeeId + " 👋";
+
+
+/* DEFAULT BOOK DATA */
 
 if(!localStorage.getItem("books")){
+
 localStorage.setItem("books",JSON.stringify([
-{id:1,title:"Data Structures",author:"Mark",stock:5},
-{id:2,title:"Operating Systems",author:"Galvin",stock:3},
-{id:3,title:"DBMS",author:"Korth",stock:4}
+
+{id:1,title:"Data Structures",author:"Mark Allen",branch:"CSE",stock:5},
+{id:2,title:"Operating Systems",author:"Galvin",branch:"CSE",stock:3},
+{id:3,title:"DBMS",author:"Korth",branch:"Central",stock:4}
+
 ]));
+
 }
 
-if(!localStorage.getItem("students")){
-localStorage.setItem("students",JSON.stringify([
-{id:"y23cd084"},
-{id:"y23cd090"}
-]));
-}
 
-if(!localStorage.getItem("issued")){
-localStorage.setItem("issued",JSON.stringify([]));
-}
+/* REQUEST DATA */
 
 if(!localStorage.getItem("requests")){
 localStorage.setItem("requests",JSON.stringify([
-{id:1,student:"y23cd084",bookId:1},
-{id:2,student:"y23cd090",bookId:2}
+{student:"y23cd084",bookId:1}
 ]));
 }
 
-/* Helpers */
+if(!localStorage.getItem("issuedBooks")){
+localStorage.setItem("issuedBooks",JSON.stringify([]));
+}
 
-function getBooks(){ return JSON.parse(localStorage.getItem("books")); }
-function getStudents(){ return JSON.parse(localStorage.getItem("students")); }
-function getIssued(){ return JSON.parse(localStorage.getItem("issued")); }
-function getRequests(){ return JSON.parse(localStorage.getItem("requests")); }
 
-function saveBooks(data){ localStorage.setItem("books",JSON.stringify(data)); }
-function saveIssued(data){ localStorage.setItem("issued",JSON.stringify(data)); }
-function saveRequests(data){ localStorage.setItem("requests",JSON.stringify(data)); }
+/* STORAGE HELPERS */
 
-/* Navigation */
+function getBooks(){
+return JSON.parse(localStorage.getItem("books"));
+}
 
-function showSection(e,section){
+function getRequests(){
+return JSON.parse(localStorage.getItem("requests"));
+}
 
-document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+function getIssued(){
+return JSON.parse(localStorage.getItem("issuedBooks"));
+}
+
+
+/* NAVIGATION */
+
+function showSection(section){
+
+document.querySelectorAll(".section")
+.forEach(s=>s.style.display="none");
 
 document.getElementById(section+"Section").style.display="block";
 
-document.querySelectorAll(".sidebar li").forEach(li=>li.classList.remove("active"));
-
-e.target.classList.add("active");
-
-loadAll();
-
 }
 
-/* Dashboard */
 
-function updateDashboard(){
+/* DASHBOARD */
+
+function loadDashboard(){
 
 let books=getBooks();
 let issued=getIssued();
+let requests=getRequests();
 
 document.getElementById("totalBooks").textContent=books.length;
 
@@ -222,26 +247,17 @@ books.reduce((sum,b)=>sum+b.stock,0);
 
 document.getElementById("issuedCount").textContent=issued.length;
 
-let overdue=0,fine=0;
-
-issued.forEach(b=>{
-if(new Date()>new Date(b.dueDate)){
-overdue++;
-fine+=10;
-}
-});
-
-document.getElementById("overdueCount").textContent=overdue;
-document.getElementById("totalFine").textContent=fine;
-document.getElementById("reportFine").textContent=fine;
+document.getElementById("requestCount").textContent=requests.length;
 
 }
 
-/* Books */
+
+/* BOOK LIST */
 
 function loadBooks(){
 
 let books=getBooks();
+
 let container=document.getElementById("bookList");
 
 container.innerHTML="";
@@ -250,13 +266,15 @@ books.forEach((b,i)=>{
 
 container.innerHTML+=`
 
-<div class="data-card">
+<div class="book-card">
 
-<strong>${b.title}</strong> (${b.author}) - Stock: ${b.stock}
+<b>${b.title}</b> (${b.author})
+<br>
+Branch: ${b.branch || "Central"}
+<br>
+Stock: ${b.stock}
 
-<button class="btn danger" onclick="deleteBook(${i})">
-<i class="fa fa-trash"></i> Delete
-</button>
+<button onclick="deleteBook(${i})">Delete</button>
 
 </div>
 
@@ -266,25 +284,35 @@ container.innerHTML+=`
 
 }
 
+
+/* ADD BOOK */
+
 function addBook(){
 
 let books=getBooks();
 
 let title=document.getElementById("titleInput").value;
 let author=document.getElementById("authorInput").value;
+let branch=document.getElementById("branchInput").value;
 let stock=parseInt(document.getElementById("stockInput").value);
 
-if(title && author && stock>0){
+books.push({
+id:Date.now(),
+title,
+author,
+branch,
+stock
+});
 
-books.push({id:Date.now(),title,author,stock});
+localStorage.setItem("books",JSON.stringify(books));
 
-saveBooks(books);
-
-loadAll();
+loadBooks();
+loadDashboard();
 
 }
 
-}
+
+/* DELETE BOOK */
 
 function deleteBook(i){
 
@@ -292,13 +320,15 @@ let books=getBooks();
 
 books.splice(i,1);
 
-saveBooks(books);
+localStorage.setItem("books",JSON.stringify(books));
 
-loadAll();
+loadBooks();
+loadDashboard();
 
 }
 
-/* Requests */
+
+/* REQUEST LIST */
 
 function loadRequests(){
 
@@ -315,13 +345,11 @@ let book=books.find(b=>b.id===r.bookId);
 
 container.innerHTML+=`
 
-<div class="data-card">
+<div class="book-card">
 
 ${r.student} requested ${book.title}
 
-<button class="btn success" onclick="approve(${i})">Approve</button>
-
-<button class="btn danger" onclick="reject(${i})">Reject</button>
+<button onclick="approve(${i})">Approve</button>
 
 </div>
 
@@ -331,69 +359,67 @@ ${r.student} requested ${book.title}
 
 }
 
-function approve(i){
 
-let requests=getRequests();
-let issued=getIssued();
-let books=getBooks();
-
-let req=requests[i];
-let book=books.find(b=>b.id===req.bookId);
-
-if(book.stock>0){
-
-book.stock--;
-
-issued.push({
-student:req.student,
-title:book.title,
-dueDate:new Date(Date.now()+5*24*60*60*1000)
-});
-
-requests.splice(i,1);
-
-saveBooks(books);
-saveIssued(issued);
-saveRequests(requests);
-
-}
-
-loadAll();
-
-}
-
-function reject(i){
-
-let requests=getRequests();
-
-requests.splice(i,1);
-
-saveRequests(requests);
-
-loadAll();
-
-}
-
-/* Students */
+/* STUDENTS */
 
 function loadStudents(){
 
-let students=getStudents();
 let issued=getIssued();
+
+let map={};
+
+issued.forEach(b=>{
+map[b.student]=(map[b.student]||0)+1;
+});
 
 let container=document.getElementById("studentList");
 
 container.innerHTML="";
 
-students.forEach(s=>{
-
-let count=issued.filter(i=>i.student===s.id).length;
+for(let s in map){
 
 container.innerHTML+=`
 
-<div class="data-card">
+<div class="book-card">
 
-${s.id} - Issued Books: ${count}
+Student: ${s}
+<br>
+Books Issued: ${map[s]}
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* BRANCH VIEW */
+
+function showBranch(branch){
+
+let books=getBooks();
+
+let container=document.getElementById("branchBooks");
+
+container.innerHTML="";
+
+document.getElementById("branchTitle").textContent =
+branch+" Library Books";
+
+books.filter(b=>b.branch===branch)
+.forEach(b=>{
+
+container.innerHTML+=`
+
+<div class="book-card">
+
+${b.title}
+<br>
+Author: ${b.author}
+<br>
+Stock: ${b.stock}
 
 </div>
 
@@ -403,18 +429,16 @@ ${s.id} - Issued Books: ${count}
 
 }
 
-/* Load All */
 
-function loadAll(){
+/* INITIAL LOAD */
 
-updateDashboard();
+loadDashboard();
 loadBooks();
 loadRequests();
 loadStudents();
 
-}
 
-loadAll();
+/* LOGOUT */
 
 function logout(){
 
